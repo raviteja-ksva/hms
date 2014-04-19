@@ -8,7 +8,7 @@
 	header('Location: login.php');
 	}
 
-	if ($_SESSION['type'] != "rep") {
+	if ($_SESSION['type'] != "admin") {
 		// $link  = $_SESSION['type'] . "_home.php";
 		$redir  = "Location: " . $_SESSION['type'] . "_home.php";
 	    header($redir);
@@ -16,8 +16,6 @@
 
 	$errors = "";
 	$is_error = 0;
-	$patient_id=$_POST['patient_id_2'];
-	// echo patient_id;
 
 	if (isset($_POST['username']) && !empty($_POST["username"]))
 	{
@@ -52,7 +50,7 @@
 	    $is_error = 1;
 	}
 
-	if (isset($_POST['address']) && !empty($_POST["address"]) && trim($_POST["address"]) != "")
+	if (isset($_POST['address']) && !empty($_POST["address"]))
 	{
 		$_POST["address"] = filter_var($_POST["address"], FILTER_SANITIZE_STRING);
 	    if ($_POST["address"] == "")
@@ -74,20 +72,20 @@
 	    $is_error = 1;
 	}
 
-	if (isset($_POST['sex']) && !empty($_POST["sex"]))
-	{
-		$sex=$_POST['sex'];
-	}  else {
-	    $errors .= 'Please enter your gender.<br/>';
+	if (isset($_POST['salary']) && !empty($_POST["salary"]))
+		$salary=$_POST['salary'];
+	else {
+	    $errors .= 'Please enter valid salary.<br/>';
 	    $is_error = 1;
 	}
-
+	
 	if($is_error == 1 || $errors != "")
 	{
 		$msg=$errors;
-	    header('Location: ../edit_patient.php?error='.urlencode($msg));
-	    echo $errors;
-	}else {
+	   	header('Location: ../reg_driver.php?error='.urlencode($msg));
+	    // echo $errors;
+	}
+	else{
 		// select database and setup connection
 
 		$con=mysql_connect('localhost','root','');
@@ -96,15 +94,14 @@
 		}
 		mysql_select_db('hospital');
 
-		$query = "UPDATE patient SET `patient_name`='$name', `address`='$address', `contact`='$phone_no', `sex`='$sex', `dob`='$dob' WHERE `patient_id`='$patient_id';" ;
-
-		// echo $query;
+		$query="INSERT INTO driver (`driver_name`, `address`, `contact`, `salery`, `dob`) VALUES ('$name', '$address', '$phone_no', '$salary', '$dob');";
+		echo $query;
 		if(mysql_query($query))
 		{
 			// echo 'inerted';
-			$patient_id = mysql_insert_id();
-			$status = "Patient record updated successfull.";
-			header('Location: ../rep_home.php?status='.urlencode($status));
+			$driver_id = mysql_insert_id();
+			$status = "Driver record added successfull.\\nDriver Registration Number = " . $driver_id;
+			header('Location: ../admin_home.php?status='.urlencode($status));
 		}
 		mysql_close($con);
 	}

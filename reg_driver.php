@@ -48,10 +48,22 @@ $username = get_username($_SESSION['userid'], $con);
         }
     ?>
         <div id="container">
-            <form action="includes/add_ambulance.php"  method="POST" >
-                <h1>Register Ambulance</h1>
-             
-               <div class="line"><label for="amb_number">Ambulance Number: </label><input type="text" id="amb_number" name='amb_number' min="0"></div>
+            <form action="includes/add_driver.php"  method="POST" >
+                <h1>Register Driver</h1>
+                <div class="line"><label for="username">Driver Name: </label><input type="text" id="username" name='username'></div>
+                <div class="line"><label for="dob">Date Of Birth :</label><input type="date" id="dob" name='dob'></div>
+
+                <!-- Birthday: <input type="date" name="bday"> -->
+
+                <div class="line"><label for="address">Address: </label><textarea id="address" name='address'>
+                </textarea></div>
+
+                <div class="line">Contact Number:
+                <input type="number" name="phone_no" min="8000000000" max="9999999999">
+                </div>
+
+                 <div class="line"><label for="salary">Salary: </label><input type="number" id="salary" name='salary' min="0"></div>
+                 
 
                 <div class="line submit"><input type="submit" value="Submit" /></div>
  

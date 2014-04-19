@@ -38,6 +38,12 @@ $username = get_username($_SESSION['userid'], $con);
 		<br>You can put your restricted information here.</p>
 
 		<p><a href="reg_doctor.php" >Add doctor</a></p>
+		<p><a href="reg_driver.php" >Add Driver</a></p>
+		<p><a href="reg_ambulance.php" >Add Ambulance</a></p>
+		<p><a href="reg_lag_teck.php" >Add lab_teck</a></p>
+		<p><a href="reg_nurse.php" >Add nurse</a></p>
+		<p><a href="reg_receptionist.php" >Add receptionist</a></p>
+		<p><a href="reg_ward_boy.php" >Add ward_boy</a></p>
 		<!-- <p><a href="rep_home.php" target="_blank">Check Doctor slot</a></p> -->
 		<!-- <p><a href="rep_home.php" target="_blank">Bill payment</a></p> -->
 

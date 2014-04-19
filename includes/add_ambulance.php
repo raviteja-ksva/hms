@@ -52,8 +52,8 @@
 	{
 		// echo 'inerted';
 	//	$accountant_id = mysql_insert_id();
-		$status = "Ambulance added successfully.\\nAmbulance Number = " . $amb_number;
-		header('Location: ../rep_home.php?status='.urlencode($status));
+		$status = "Ambulance added successfully.";
+		header('Location: ../admin_home.php?status='.urlencode($status));
 	}
 	mysql_close($con);
 ?>
