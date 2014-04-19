@@ -40,7 +40,8 @@ $username = get_username($_SESSION['userid'], $con);
 		<p><a href="reg_patient.php" >Register patient</a></p>
 		<p><a href="edit_patient.php" >Edit patient Details</a></p>
 		<p><a href="rep_home.php" target="_blank">Book Apointment</a></p>
-		<p><a href="rep_home.php" target="_blank">Send Ambulence</a></p>
+		<p><a href="amb_service.php" target="_blank">Send Ambulence</a></p>
+		<p><a href="clear_amb_service.php" target="_blank">Clear Ambulence</a></p>
 		<p><a href="rep_home.php" target="_blank">Clean a room</a></p>
 		<!-- <p><a href="rep_home.php" target="_blank">Check Doctor slot</a></p> -->
 		<p><a href="rep_home.php" target="_blank">Bill payment</a></p>

@@ -17,41 +17,6 @@
     include('includes/config.inc');
     include('includes/functions.php');
     $username = get_username($_SESSION['userid'], $con);
-    $is_valid_pat_id = 0;
-?>
-
-<?php 
-    if(isset($_GET['patient_id'])) 
-    { 
-        $patient_id = $_GET['patient_id'];
-        // echo "User Has submitted the form and entered this name : <b> $name </b>";
-        // echo "<br>You can use the following form again to enter a new name."; 
-
-        $query = "select patient_name, address, contact, sex, dob from patient where patient_id = ?;" ;
-
-
-        if ($stmt = $con->prepare($query)) {
-            $stmt->bind_param('i', $patient_id);  // Bind "$patient_id" to parameter.
-            $stmt->execute();
-            $stmt->bind_result($pat_name, $pat_add, $pat_phone, $pat_sex, $pat_dob);
-            if ($stmt->fetch()) {
-                //printf("%s, %s\n", $field1, $field2);
-                    // echo $pat_name . "<br/>";
-                    // echo $pat_add . "<br/>";
-                    // echo $pat_phone . "<br/>";
-                    // echo $pat_sex . "<br/>";
-                    // echo $pat_dob . "<br/>";
-                $is_valid_pat_id = 1;
-            }
-            else
-            {
-                $is_valid_pat_id = 0;
-                echo "<p style='color:red'> Registration number does not exists </p>" ;
-            }
-            $stmt->close();
-        }
-    }
-
 ?>
 
 <html>
@@ -72,16 +37,6 @@
             form .line.submit {text-align:left;}
  
         </style>
-        <script src="includes/jquery.js"></script>
-        <script type="text/javascript">
-        $('document').ready(function(){
-                //alert('dada');
-                $('#patient_id_2').attr("type", "hidden");
-                // var id=$('#patient_id_2').val();
-                
-                //alert(id);
-        });
-        </script>
     </head>
     <body>
     <?php
@@ -93,7 +48,6 @@
         }
     ?>
         <div id="container">
-<!-- <?php echo $is_valid_pat_id; ?> -->
             <h1>Edit Patient Details</h1>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="GET" >                    
                 <div class="line">Medical Registration Number:
