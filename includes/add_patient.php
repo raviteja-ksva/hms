@@ -1,75 +1,105 @@
 <?php
-// Inialize session
-session_start();
 
-// Include database connection settings
+	// Inialize session
+	session_start();
 
-//include('config.inc');
-//require 'connect.php';
+	// Check, if username session is NOT set then this page will jump to login page
+	if (!isset($_SESSION['userid'])) {
+	header('Location: login.php');
+	}
 
-// Grab User submitted information
-$errors = "";
-$is_error = 0;
+	if ($_SESSION['type'] != "rep") {
+		// $link  = $_SESSION['type'] . "_home.php";
+		$redir  = "Location: " . $_SESSION['type'] . "_home.php";
+	    header($redir);
+	}
 
-if (isset($_POST['username']))
-{
-	// echo $_POST['username'];
-    $_POST["username"] = filter_var($_POST["username"], FILTER_SANITIZE_STRING);
-    if ($_POST["username"] == "")
-    {
-        $errors .= 'Please enter a valid name.<br/><br/>';
-        $is_error = 1;
-    }
-    else
-    {
-    	$name = $_POST["username"];
-    	// echo $name ;
-		// echo $errors;
-    }
-} else {
-    $errors .= 'Please enter your name.<br/>';
-    $is_error =1;
-}
+	$errors = "";
+	$is_error = 0;
 
-if (isset($_POST['dob']))
-{
-	$cur_date = date("Y-m-d");
-	echo $cur_date . "<br>";
-	$dob = $_POST['dob'];
+	if (isset($_POST['username']) && !empty($_POST["username"]))
+	{
+		// echo $_POST['username'];
+	    $_POST["username"] = filter_var($_POST["username"], FILTER_SANITIZE_STRING);
+	    if ($_POST["username"] == "")
+	    {
+	        $errors .= 'Please enter a valid name.<br/>';
+	        $is_error = 1;
+	    }
+	    else
+	    	$name = $_POST["username"];
+	} else {
+	    $errors .= 'Please enter your name.<br/>';
+	    $is_error = 1;
+	}
 
-	$datetime2 = new DateTime($cur_date);
-	$datetime1 = new DateTime($dob);
-	$interval = $datetime1->diff($datetime2);
-	if($cur_date < $dob )
-		echo "error...";
-	else
-		echo $interval->format('%R%a days');
+	if (isset($_POST['dob']) && !empty($_POST["dob"]))
+	{
+		$cur_date = date("Y-m-d");
+		// echo $cur_date . "<br/>";
+		if($cur_date < $_POST['dob'] ){
+			// echo "error...";
+			$is_error = 1;
+			$errors .= 'Please enter a valid date. <br/>';
+		}
+		else
+			$dob = $_POST['dob'];
 
-}  else {
-    echo 'Please enter your dob.<br/>';
-}
+	}  else {
+	    $errors .= 'Please enter your Date of Birth.<br/>';
+	    $is_error = 1;
+	}
 
-if (isset($_POST['address']) && isset($_POST['phone_no'])&& isset($_POST['sex']))
-{
-	$address=$_POST['address'];
-	$dob = $_POST['dob'];
-	$phone_no=$_POST['phone_no'];
-	$sex=$_POST['sex'];
-}  else {
-    echo 'Please enter your dob.<br/>';
-}
+	if (isset($_POST['address']) && !empty($_POST["address"]))
+	{
+		$_POST["address"] = filter_var($_POST["address"], FILTER_SANITIZE_STRING);
+	    if ($_POST["address"] == "")
+	    {
+	        $errors .= 'Please enter a valid address.<br/>';
+	        $is_error = 1;
+	    }
+	    else
+			$address=$_POST['address'];
+	}  else {
+	    $errors .= 'Please a address.<br/>';
+	    $is_error = 1;
+	}
 
+	if (isset($_POST['phone_no']) && !empty($_POST["phone_no"]))
+		$phone_no=$_POST['phone_no'];
+	else {
+	    $errors .= 'Please enter your phone number.<br/>';
+	    $is_error = 1;
+	}
 
-// $con=mysql_connect('localhost','root','');
-// mysql_select_db('hospital');
+	if (isset($_POST['sex']) && !empty($_POST["sex"]))
+	{
+		$sex=$_POST['sex'];
+	}  else {
+	    $errors .= 'Please enter your gender.<br/>';
+	    $is_error = 1;
+	}
 
-// $query="INSERT INTO patient (`patient_name`, `address`, `contact`, `sex`, `dob`) VALUES ('$name', '$address', '$phone_no', '$sex', '$dob');";
-// echo $query;
-// if(mysql_query($query))
-// {
+	if($is_error == 1 || $errors != "")
+	{
+		$msg=$errors;
+	    header('Location: ../reg_patient.php?error='.urlencode($msg));
+	    echo $errors;
+	}
 
-// 	echo 'inerted';
-// }
+	// select database and setup connection
+
+	$con=mysql_connect('localhost','root','');
+	mysql_select_db('hospital');
+
+	$query="INSERT INTO patient (`patient_name`, `address`, `contact`, `sex`, `dob`) VALUES ('$name', '$address', '$phone_no', '$sex', '$dob');";
+	// echo $query;
+	if(mysql_query($query))
+	{
+		// echo 'inerted';
+		$status = "Patient record added successfull";
+		header('Location: ../rep_home.php?status='.urlencode($status));
+	}
 
 
 ?>

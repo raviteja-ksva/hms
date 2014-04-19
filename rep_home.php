@@ -19,6 +19,15 @@ include('includes/functions.php');
 $username = get_username($_SESSION['userid'], $con);
 
 ?>
+
+<?php
+    if(isset($_GET['status']))
+    {
+    	$status = $_GET['status'];
+       	echo '<script type="text/javascript"> alert("' .  $status .'"); </script>';
+	}
+?>
+
 <html>
 	<head>
 		<title>Receptionist Home Page</title>
@@ -28,7 +37,7 @@ $username = get_username($_SESSION['userid'], $con);
 		<p>This is secured page with session: <b> <?php echo $username; ?></b>
 		<br>You can put your restricted information here.</p>
 
-		<p><a href="reg_patient.php" target="_blank">Register patient</a></p>
+		<p><a href="reg_patient.php" >Register patient</a></p>
 		<p><a href="rep_home.php" target="_blank">Book Apointment</a></p>
 		<p><a href="rep_home.php" target="_blank">Send Ambulence</a></p>
 		<p><a href="rep_home.php" target="_blank">Clean a room</a></p>

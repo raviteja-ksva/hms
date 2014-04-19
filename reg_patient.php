@@ -1,4 +1,25 @@
-<!doctype html>
+<?php
+
+// Inialize session
+session_start();
+
+// Check, if username session is NOT set then this page will jump to login page
+if (!isset($_SESSION['userid'])) {
+header('Location: login.php');
+}
+
+if ($_SESSION['type'] != "rep") {
+    // $link  = $_SESSION['type'] . "_home.php";
+    $redir  = "Location: " . $_SESSION['type'] . "_home.php";
+    header($redir);
+}
+
+include('includes/config.inc');
+include('includes/functions.php');
+$username = get_username($_SESSION['userid'], $con);
+
+?>
+
 <html>
     <head>
         <style type="text/css">
@@ -19,6 +40,14 @@
         </style>
     </head>
     <body>
+    <?php
+        if(isset($_GET['error']))
+        {
+            $error = $_GET['error'];
+            echo $error . "<br/>" ;
+            echo "<p style='color:red'> Incorrect details </p>" ;
+        }
+    ?>
         <div id="container">
             <form action="includes/add_patient.php"  method="POST" >
                 <h1>Register Patient</h1>
@@ -34,7 +63,7 @@
                 <input type="number" name="phone_no" min="8000000000" max="9999999999">
                 </div>
 
-                <div class="line"><label for="username">Sex:</label><br></div>
+                <div class="line">Sex:<br></div>
                 <input type="radio" name="sex" value="m">male
                 <input type="radio" name="sex" value="f">Female
 
