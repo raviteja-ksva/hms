@@ -90,6 +90,9 @@
 	// select database and setup connection
 
 	$con=mysql_connect('localhost','root','');
+	if (!$con) {
+    	die('Could not connect: ' . mysql_error());
+	}
 	mysql_select_db('hospital');
 
 	$query="INSERT INTO patient (`patient_name`, `address`, `contact`, `sex`, `dob`) VALUES ('$name', '$address', '$phone_no', '$sex', '$dob');";
@@ -97,9 +100,9 @@
 	if(mysql_query($query))
 	{
 		// echo 'inerted';
-		$status = "Patient record added successfull";
+		$patient_id = mysql_insert_id();
+		$status = "Patient record added successfull.\\nPatient Medical Registration Number = " . $patient_id;
 		header('Location: ../rep_home.php?status='.urlencode($status));
 	}
-
-
+	mysql_close($con);
 ?>

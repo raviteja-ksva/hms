@@ -21,5 +21,6 @@ $pass = mysql_real_escape_string($_POST["users_pass"]);
         $msg='Incorrect Username or Password';
         header('Location: ../login.php?error='.urlencode($msg));
     }
+    mysql_close($con);
 ?>
 
