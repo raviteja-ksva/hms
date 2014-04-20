@@ -44,7 +44,8 @@ $username = get_username($_SESSION['userid'], $_SESSION['type'], $con);
 		<p><a href="clear_amb_service.php">Clear Ambulence Service</a></p>
 		<p><a href="rep_home.php" target="_blank">Clean a room</a></p>
 		<!-- <p><a href="rep_home.php" target="_blank">Check Doctor slot</a></p> -->
-		<p><a href="rep_home.php" target="_blank">Bill payment</a></p>
+
+		<p><a href="pay_bill.php">Bill payment</a></p>
 
 		<p><a href="chng_pass.php">Change Password</a></p>
 		<p><a href="includes/logout.php">Logout</a></p>
