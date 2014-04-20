@@ -101,8 +101,14 @@
 	{
 		// echo 'inerted';
 		$patient_id = mysql_insert_id();
-		$status = "Patient record added successfull.\\nPatient Medical Registration Number = " . $patient_id;
-		header('Location: ../rep_home.php?status='.urlencode($status));
+
+		$login_query = "INSERT INTO login (`user_id`, `user_name`, `type`, `password`) VALUES ('$patient_id', '$name', 'patient', '$name');";
+		if(mysql_query($login_query))
+		{
+			$status = "Patient record added successfull.\\nPatient Medical Registration Number = " . $patient_id;
+			header('Location: ../rep_home.php?status='.urlencode($status));
+		}
 	}
+
 	mysql_close($con);
 ?>

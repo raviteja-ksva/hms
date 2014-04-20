@@ -16,7 +16,7 @@
 
     include('includes/config.inc');
     include('includes/functions.php');
-    $username = get_username($_SESSION['userid'], $con);
+    $username = get_username($_SESSION['userid'], $_SESSION['type'], $con);
     $is_valid_pat_id = 0;
 ?>
 

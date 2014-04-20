@@ -15,7 +15,7 @@ if ($_SESSION['type'] != "doctor") {
 
 include('includes/config.inc');
 include('includes/functions.php');
-$username = get_username($_SESSION['userid'], $con);
+$username = get_username($_SESSION['userid'],$_SESSION['type'], $con);
 ?>
 <html>
 	<head>
@@ -26,6 +26,10 @@ $username = get_username($_SESSION['userid'], $con);
 	<p> Hello <?php echo $_SESSION['type'] ?> </p>
 		<p>This is secured page with session: <b><?php echo $_SESSION['userid']; ?></b>
 		<br>You can put your restricted information here.</p>
+
+		<p><a href="give_prex.php">Write Prescription</a></p>
+		<p><a href="view_apmt.php">View Appointments</a></p>
+		<p><a href="chng_pass.php">Change Password</a></p>
 		<p><a href="includes/logout.php">Logout</a></p>
 
 	</body>

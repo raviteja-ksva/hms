@@ -16,7 +16,7 @@ if ($_SESSION['type'] != "admin") {
 
 include('includes/config.inc');
 include('includes/functions.php');
-$username = get_username($_SESSION['userid'], $con);
+$username = get_username($_SESSION['userid'],$_SESSION['type'], $con);
 
 ?>
 
@@ -47,6 +47,7 @@ $username = get_username($_SESSION['userid'], $con);
 		<!-- <p><a href="rep_home.php" target="_blank">Check Doctor slot</a></p> -->
 		<!-- <p><a href="rep_home.php" target="_blank">Bill payment</a></p> -->
 
+		<p><a href="chng_pass.php">Change Password</a></p>
 		<p><a href="includes/logout.php">Logout</a></p>
 
 

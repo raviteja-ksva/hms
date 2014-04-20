@@ -145,8 +145,12 @@
 	{
 		 echo 'inerted';
 		$doctor_id = mysql_insert_id();
-		$status = "Doctor record added successfull.\\nDoctor Registration Number = " . $doctor_id;
-		header('Location: ../rep_home.php?status='.urlencode($status));
+		$login_query = "INSERT INTO login (`user_id`, `user_name`, `type`, `password`) VALUES ('$doctor_id', '$name', 'doctor', '$name');";
+		if(mysql_query($login_query))
+		{
+			$status = "Doctor record added successfull.\\nDoctor Registration Number = " . $doctor_id;
+			header('Location: ../rep_home.php?status='.urlencode($status));
+		}
 	}
 	
 	mysql_close($con);
