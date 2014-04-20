@@ -14,12 +14,10 @@
 	}
 ?>
 
-</body>
-</html>	
 
 <html>
     <head>
-    <title>Prescription</title>
+    <title>Lab Test</title>
         <style type="text/css">
  
             body {font-family:Arial, Sans-Serif;}
@@ -55,8 +53,8 @@
 		}
 	?>
         <div id="container">
-            <form action="includes/write_prex.php"  method="POST" id="prex_from" >
-                <h1>Write Prescription</h1>
+            <form action="includes/write_test.php"  method="POST" id="lab_form" >
+                <h1>Write Test</h1>
 
                 <div class="line">Patient Medical Registration Number:
                 <input type="number" name="patient_id" id="patient_id">
@@ -66,34 +64,37 @@
 					// Creating query to fetch state information from mysql database table.
 					mysql_connect("localhost","root","");
 					mysql_select_db("hospital");
-					$query = "select DISTINCT med_name from medicine where stock > 0;";
+					$query = "select lt_id, lt_name from lab_teck;";
 					$result = mysql_query($query);
 
-					echo "Medicine:<br/>";
-					echo '<select name="med_name" id="med_name" form="prex_from"> ';
-					echo '<option value=""> </option>';
+					echo "Lab Teck:<br/>";
+					echo '<select name="lt_id" id="lt_id" form="lab_form"> ';
+					// echo '<option value=""> </option>';
 					while ($row = mysql_fetch_array($result) )
 					{
-					   	echo '<option value="' .$row["med_name"]. '">'.$row["med_name"].'</option>';
+					   	echo '<option value="' .$row["lt_id"]. '">'.$row["lt_name"].'</option>';
 					}
-					echo "</select>";
+					echo "</select><br/>";
+
+					$query = "select test_id, test_name from tests_info;";
+					$result = mysql_query($query);
+					echo "Test:<br/>";
+					echo '<select name="test_id" id="test_id" form="lab_form"> ';
+					// echo '<option value=""> </option>';
+					while ($row = mysql_fetch_array($result) )
+					{
+					   	echo '<option value="' .$row["test_id"]. '">'.$row["test_name"].'</option>';
+					}
+					echo "</select><br/>";
 
 				?>
 
-                <div class="line">Number of days:<br/>
-                <input type="number" name="no_days" id="no_days" min="1">
-                </div>
-
-                <input type="checkbox" name="morning" value="1">Morning
-				<input type="checkbox" name="afternoon" value="1">Afternoon
-				<input type="checkbox" name="night" value="1">night<br/>
-
-
+                <div class="line">Test Date<input type="date" id="test_date" name='test_date'></div>
                 <div class="line submit"><input type="submit" value="Submit" /></div>
  
             </form>
-        <form action= "give_prex.php" >
-            <div class="line submit"><input type="submit" value="Continue Prescription" /></div>
+        <form action= "give_test.php" >
+            <div class="line submit"><input type="submit" value="Another Test" /></div>
         </form>
         <form action= "doctor_home.php" >
             <div class="line submit"><input type="submit" value="Back to home page" /></div>

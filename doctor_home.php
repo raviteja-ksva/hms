@@ -28,6 +28,8 @@ $username = get_username($_SESSION['userid'],$_SESSION['type'], $con);
 		<br>You can put your restricted information here.</p>
 
 		<p><a href="give_prex.php">Write Prescription</a></p>
+		<p><a href="give_test.php">Write Test</a></p>
+
 		<p><a href="view_apmt.php">View Appointments</a></p>
 		<p><a href="chng_pass.php">Change Password</a></p>
 		<p><a href="includes/logout.php">Logout</a></p>
