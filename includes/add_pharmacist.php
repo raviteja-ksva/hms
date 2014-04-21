@@ -104,7 +104,7 @@
 		// echo 'inerted';
 		$ph_id = mysql_insert_id();
 		$status = "Pharmacist record added successfull.\\nPharmacist Registration Number = " . $ph_id;
-		header('Location: ../rep_home.php?status='.urlencode($status));
+		header('Location: ../admin_home.php?status='.urlencode($status));
 	}
 	mysql_close($con);
 ?>

@@ -114,6 +114,19 @@
 	    $errors .= 'Please enter valid appointment_charge.<br/>';
 	    $is_error = 1;
 	}
+	if (isset($_POST['doc_st']))
+		$doc_st=$_POST['doc_st'];
+	else {
+	    $errors .= 'Please enter valid start time of doctor.<br/>';
+	    $is_error = 1;
+	}
+	if (isset($_POST['doc_et']))
+		$doc_et=$_POST['doc_et'];
+	else {
+	    $errors .= 'Please enter valid end time of doctor.<br/>';
+	    $is_error = 1;
+	}
+
 	if (isset($_POST['operation_charge']) && !empty($_POST["operation_charge"]))
 		$operation_charge=$_POST['operation_charge'];
 	else {
@@ -141,14 +154,25 @@
 
 	$query="INSERT INTO doctor (`doctor_name`, `dob`, `address`, `salary`, `contact`, `designation`, `type`, `appointment_charge`, `operation_charge`) VALUES ('$name', '$dob', '$address',  '$salary', '$phone_no', '$designation', '$type', '$appointment_charge', '$operation_charge');";
 	echo $query;
+
 	if(mysql_query($query,$con))
 	{
 		 echo 'inerted';
 		$doctor_id = mysql_insert_id();
-		$login_query = "INSERT INTO login (`user_id`, `user_name`, `type`, `password`) VALUES ('$doctor_id', '$name', 'doctor', '$name');";
-		if(mysql_query($login_query))
+
+		$query2 = "INSERT INTO doctor_slot (`doctor_id`, `start_time`, `end_time`) VALUES ('$doctor_id', '$doc_st', '$doc_et');";
+		if(mysql_query($query2))
 		{
-			$status = "Doctor record added successfull.\\nDoctor Registration Number = " . $doctor_id;
+			$login_query = "INSERT INTO login (`user_id`, `user_name`, `type`, `password`) VALUES ('$doctor_id', '$name', 'doctor', '$name');";
+			if(mysql_query($login_query))
+			{
+				$status = "Doctor record added successfull.\\nDoctor Registration Number = " . $doctor_id;
+				header('Location: ../rep_home.php?status='.urlencode($status));
+			}
+		}
+		else
+		{
+			$status = "Dcotor slot time not updates try again";
 			header('Location: ../rep_home.php?status='.urlencode($status));
 		}
 	}

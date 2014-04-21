@@ -68,7 +68,8 @@
 			}else
 			{
 				$status = "Try again.";
-	            header('Location: ../book_appt.php?error='.urlencode($status));
+	            // header('Location: ../book_appt.php?error='.urlencode($status));
+	            echo $status . "<br/>";
 			}
 			// run a for loop
 			$time =  ($doc_et - $doc_st)*2 ;
@@ -130,7 +131,7 @@
             header('Location: ../rep_home.php?status='.urlencode($status));
         }else {
         	$status = "Try again.";
-	        header('Location: ../book_appt.php?error='.urlencode($status));
+	        // header('Location: ../book_appt.php?error='.urlencode($status));
         }        
 
         echo $query ."<br/>" ;

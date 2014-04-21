@@ -52,6 +52,8 @@ if ($_SESSION['type'] != "admin") {
                 <div class="line"><label for="designation">Designation: </label><input type="text" id="designation" name='designation'></div>
                 <div class="line"><label for="type">Type: </label><input type="text" id="type" name='type' ></div>
                 <div class="line"><label for="appointment_charge">Appointment charge: </label><input type="number" id="appointment_charge" name='appointment_charge' min="0"></div>
+                Select a Start time: <input type="time" name="doc_st"><br/>
+                Select a end time: <input type="time" name="doc_et"><br/>
                 <div class="line"><label for="operation_charge">Operation charge: </label><input type="number" id="operation_charge" name='operation_charge' min="0"></div>
                 <div class="line"><label for="dob">Date Of Birth :</label><input type="date" id="dob" name='dob'></div>
 

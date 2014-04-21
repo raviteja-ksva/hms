@@ -16,7 +16,7 @@ if ($_SESSION['type'] != "rep") {
 
 include('includes/config.inc');
 include('includes/functions.php');
-$username = get_username($_SESSION['userid'], $con);
+// $username = get_username($_SESSION['userid'], $con);
 
 ?>
 

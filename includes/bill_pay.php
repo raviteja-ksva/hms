@@ -16,7 +16,7 @@
     $errors = "";
     $is_error = 0;
 
-    if ( !empty($_POST["patient_id"]) )
+    if ( isset($_POST["patient_id"]) )
         $patient_id = $_POST['patient_id'];
     else {
         $errors .= 'Please enter valid Patients registration number.<br/>';
@@ -36,30 +36,43 @@
         }
         mysql_select_db('hospital');
         $query = "select med_name, number, med_tx_id from med_tx where patient_id = $patient_id and paid = '0';";
-        echo $query . "<br/>" ;
+        echo $query . "<br/><br/>" ;
         $result = mysql_query($query);
         $cost = 0;
+        echo '<table border="1">';
+        echo '<tr><th>med_name</th><th>number</th><th>price</th></tr>';
         while($row = mysql_fetch_assoc($result))
         {
+
+            echo '<tr>';
+            echo '<td>'.$row['med_name'].'</td>';
+            echo '<td>'.$row['number'].'</td>';
+            
+
             $med_name = $row["med_name"];
             $num = $row["number"];
             // $price = $row["price"];
 
             $query2 = "select price from med_cost where med_name='$med_name';";
-            echo $query2 . "<br/>";
+            // echo $query2 . "<br/>";
             $result2 = mysql_query($query2);
             if($row2 = mysql_fetch_assoc($result2))
             {
                 $price = $row2["price"];
                 $cost = $cost + $num * $price;
             }
-
+            echo '<td>'.$price*$num.'</td>';
+            echo '</tr>';
             // echo "cost is " .$cost . "<br/>";
         }
+        echo '</table> <br />';
         $status = "Total amount = " . $cost;
-        header('Location: ../rep_home.php?status='.urlencode($status));
-        echo $cost ."<br/>";
-
+        // header('Location: ../rep_home.php?status='.urlencode($status));
+        echo "<h4> Total : ".$cost ."</h4><br/>";
     }
-
 ?>
+
+<form action= "pay_amnt.php" method="POST">
+    <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>">
+   <div class="line submit"><input type="submit" value="Pay" /></div>
+</form>

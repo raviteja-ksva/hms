@@ -50,7 +50,7 @@
 	    $is_error = 1;
 	}
 
-	if (isset($_POST['address']) && !empty($_POST["address"]))
+	if (isset($_POST['address']) && trim($_POST["address"], " \t.") !="")
 	{
 		$_POST["address"] = filter_var($_POST["address"], FILTER_SANITIZE_STRING);
 	    if ($_POST["address"] == "")
@@ -85,30 +85,38 @@
 		$msg=$errors;
 	    header('Location: ../reg_patient.php?error='.urlencode($msg));
 	    echo $errors;
-	}
-
-	// select database and setup connection
-
-	$con=mysql_connect('localhost','root','');
-	if (!$con) {
-    	die('Could not connect: ' . mysql_error());
-	}
-	mysql_select_db('hospital');
-
-	$query="INSERT INTO patient (`patient_name`, `address`, `contact`, `sex`, `dob`) VALUES ('$name', '$address', '$phone_no', '$sex', '$dob');";
-	// echo $query;
-	if(mysql_query($query))
+	}else
 	{
-		// echo 'inerted';
-		$patient_id = mysql_insert_id();
 
-		$login_query = "INSERT INTO login (`user_id`, `user_name`, `type`, `password`) VALUES ('$patient_id', '$name', 'patient', '$name');";
-		if(mysql_query($login_query))
-		{
-			$status = "Patient record added successfull.\\nPatient Medical Registration Number = " . $patient_id;
-			header('Location: ../rep_home.php?status='.urlencode($status));
-		}
+		echo $name . "<br/>";
+		echo $dob . "<br/>";
+		echo $address . "<br/>";
+		echo $phone_no . "<br/>";
+		echo $sex . "<br/>";
+
+		// select database and setup connection
+
+			$con=mysql_connect('localhost','root','');
+			if (!$con) {
+		    	die('Could not connect: ' . mysql_error());
+			}
+			mysql_select_db('hospital');
+
+			$query="INSERT INTO patient (`patient_name`, `address`, `contact`, `sex`, `dob`) VALUES ('$name', '$address', '$phone_no', '$sex', '$dob');";
+			// echo $query;
+			if(mysql_query($query))
+			{
+				// echo 'inerted';
+				$patient_id = mysql_insert_id();
+
+				$login_query = "INSERT INTO login (`user_id`, `user_name`, `type`, `password`) VALUES ('$patient_id', '$name', 'patient', '$name');";
+				if(mysql_query($login_query))
+				{
+					$status = "Patient record added successfull.\\nPatient Medical Registration Number = " . $patient_id;
+					header('Location: ../rep_home.php?status='.urlencode($status));
+				}
+			}
+
+		mysql_close($con);
 	}
-
-	mysql_close($con);
 ?>
