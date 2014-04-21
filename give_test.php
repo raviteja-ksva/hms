@@ -67,15 +67,6 @@
 					$query = "select lt_id, lt_name from lab_teck;";
 					$result = mysql_query($query);
 
-					echo "Lab Teck:<br/>";
-					echo '<select name="lt_id" id="lt_id" form="lab_form"> ';
-					// echo '<option value=""> </option>';
-					while ($row = mysql_fetch_array($result) )
-					{
-					   	echo '<option value="' .$row["lt_id"]. '">'.$row["lt_name"].'</option>';
-					}
-					echo "</select><br/>";
-
 					$query = "select test_id, test_name from tests_info;";
 					$result = mysql_query($query);
 					echo "Test:<br/>";
@@ -89,7 +80,7 @@
 
 				?>
 
-                <div class="line">Test Date<input type="date" id="test_date" name='test_date'></div>
+                <!-- <div class="line">Test Date<input type="date" id="test_date" name='test_date'></div> -->
                 <div class="line submit"><input type="submit" value="Submit" /></div>
  
             </form>

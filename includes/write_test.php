@@ -31,13 +31,13 @@
 	    $is_error = 1;
 	}
 
-	if (isset($_POST['lt_id']))
-	{
-		$lt_id=$_POST['lt_id'];
-	}  else {
-	    $errors .= 'Please select correct lab teck .<br/>';
-	    $is_error = 1;
-	}
+	// if (isset($_POST['lt_id']))
+	// {
+	// 	$lt_id=$_POST['lt_id'];
+	// }  else {
+	//     $errors .= 'Please select correct lab teck .<br/>';
+	//     $is_error = 1;
+	// }
 
 	if (isset($_POST['test_id']))
 	{
@@ -47,13 +47,13 @@
 	    $is_error = 1;
 	}
 
-	if (isset($_POST['test_date']))
-	{
-		$test_date=$_POST['test_date'];
-	}  else {
-	    $errors .= 'Please select valid test date.<br/>';
-	    $is_error = 1;
-	}
+	// if (isset($_POST['test_date']))
+	// {
+	// 	$test_date=$_POST['test_date'];
+	// }  else {
+	//     $errors .= 'Please select valid test date.<br/>';
+	//     $is_error = 1;
+	// }
 
 	if($is_error == 1 || $errors != "")
 	{
@@ -68,7 +68,7 @@
 		}
 		mysql_select_db('hospital');
 		
-		$query = "INSERT INTO test_transaction (`test_id`, `patient_id`, `lt_id`, `test_date`) VALUES ('$test_id', '$patient_id', '$lt_id', '$test_date');";
+		$query = "INSERT INTO test_transaction (`test_id`, `patient_id`) VALUES ('$test_id', '$patient_id');";
 		if(mysql_query($query))
 		{
 			$status = "Test added successfull";

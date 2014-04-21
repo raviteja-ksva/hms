@@ -65,10 +65,30 @@
             echo '</tr>';
             // echo "cost is " .$cost . "<br/>";
         }
+        echo "<h4> Total Medication Cost : ".$cost ."</h4><br/>";
         echo '</table> <br />';
+
+        $cost2 = 0;
+        $query2 = "select t1.test_id, t1.test_name, t1.cost from tests_info as t1, test_transaction as t2 where t1.test_id =t2.test_id and t1.test_id in (select test_id from test_transaction where patient_id=$patient_id and paid = 0);";
+        echo $query2 . "<br/>";
+        $result2 = mysql_query($query2);
+        // $cost = 0;
+        echo '<table border="1">';
+        echo '<tr><th>Test_name</th><th>cost</th></tr>';
+        while($row = mysql_fetch_assoc($result2))
+        {
+            echo '<tr>';
+            echo '<td>'.$row['test_name'].'</td>';
+            echo '<td>'.$row['cost'].'</td>';
+            $cost2 = $cost2 + $row['cost'];
+            echo '</tr>';
+        }
+        echo '</table> <br />';
+        echo "<h4> Total Tests Cost : ".$cost2 ."</h4><br/>";
         $status = "Total amount = " . $cost;
+        // echo $status . "<br/>";
         // header('Location: ../rep_home.php?status='.urlencode($status));
-        echo "<h4> Total : ".$cost ."</h4><br/>";
+        echo "<h4> Total : ".($cost + $cost2) ."</h4><br/>";
     }
 ?>
 
