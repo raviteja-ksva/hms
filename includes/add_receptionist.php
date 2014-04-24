@@ -96,6 +96,7 @@
 	}
 
 	// select database and setup connection
+	else{
 
 	$con=mysql_connect('localhost','root','');
 	if (!$con) {
@@ -119,4 +120,5 @@
 
 	}
 	mysql_close($con);
+}
 ?>

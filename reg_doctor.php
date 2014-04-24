@@ -47,7 +47,7 @@ if ($_SESSION['type'] != "admin") {
             <form action="includes/add_doctor.php"  method="POST" >
                 <h1>Register Doctor</h1>
                 <div class="line"><label for="username">Name: </label><input type="text" id="username" name='username'></div>
-                <div class="line"><label for="age">Age: </label><input type="number" id="age" name='age' min="0"></div>
+              <!--   <div class="line"><label for="age">Age: </label><input type="number" id="age" name='age' min="0"></div> -->
                 <div class="line"><label for="salary">Salary: </label><input type="number" id="salary" name='salary' min="0"></div>
                 <div class="line"><label for="designation">Designation: </label><input type="text" id="designation" name='designation'></div>
                 <div class="line"><label for="type">Type: </label><input type="text" id="type" name='type' ></div>
@@ -73,7 +73,15 @@ if ($_SESSION['type'] != "admin") {
                 <div class="line submit"><input type="submit" value="Submit" /></div>
  
                 <p>Note: Please make sure you entered correct details  before submitting form.</p>
+
             </form>
+
+<form action= "home.php" method="POST">
+  <!-- //  <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>"> -->
+   <div class="line submit"><input type="submit" value="back to home page " /></div>
+</form>
+
+            
         </div>
     </body>
 </html>

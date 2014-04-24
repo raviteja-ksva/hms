@@ -97,10 +97,12 @@
             <h1>Edit Patient Details</h1>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="GET" >                    
                 <div class="line">Medical Registration Number:
-                <input type="number" name="patient_id" value="<?php echo $patient_id; ?>">
+                <input type="number" name="patient_id" value="<?php if($is_valid_pat_id == 1) echo $patient_id; ?>">
                 </div>
                 <input type="submit" value="Go" />
             </form>
+
+
             <form action="includes/update_patient.php"  method="POST" >
 
                 <div class="line"><label for="username">Name: </label><input type="text" id="username" name='username' value="<?php if($is_valid_pat_id == 1) echo $pat_name; ?>"></div>
@@ -125,6 +127,10 @@
     
                 <p>Note: Please make sure your details are correct before submitting form.</p>
             </form>
+            <form action= "home.php" method="POST">
+  <!-- //  <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>"> -->
+   <div class="line submit"><input type="submit" value="back to home page " /></div>
+</form>
         </div>
     </body>
 </html>

@@ -65,34 +65,68 @@
             echo '</tr>';
             // echo "cost is " .$cost . "<br/>";
         }
-        echo "<h4> Total Medication Cost : ".$cost ."</h4><br/>";
         echo '</table> <br />';
 
-        $cost2 = 0;
-        $query2 = "select t1.test_id, t1.test_name, t1.cost from tests_info as t1, test_transaction as t2 where t1.test_id =t2.test_id and t1.test_id in (select test_id from test_transaction where patient_id=$patient_id and paid = 0);";
-        echo $query2 . "<br/>";
-        $result2 = mysql_query($query2);
-        // $cost = 0;
+
+
+
+      //   $query2 = "select cost from med_cost where med_name='$med_name';";
+
+
+            $query = "select room_no, admission_date, discharge_date  from admission where patient_id = $patient_id  and paid = 0";
+            
+        echo $query . "<br/><br/>" ;
+        $result = mysql_query($query);
+        $room_cost=0;
+        $cost1 = 0;
         echo '<table border="1">';
-        echo '<tr><th>Test_name</th><th>cost</th></tr>';
-        while($row = mysql_fetch_assoc($result2))
+        echo '<tr><th>Admission date</th><th>Discharge date</th><th>price</th></tr>';
+        while($row = mysql_fetch_assoc($result))
         {
+            $datetime1 = strtotime($row['admission_date']);
+            $datetime2 = strtotime($row['discharge_date']);
+            $rom=$row["room_no"];
+             $query2 = "select t2.room_cost from room as t1, room_type as t2 where t1.room_type=t2.room_type and t1.room_no= $rom ;";
+             echo $query2 ;
+             $result2 = mysql_query($query2);
+             if($row2 = mysql_fetch_assoc($result2))
+            {
+            //    $price = $row2["price"];
+                $cost1 = $row2['room_cost'];
+            }
+              $secs = $datetime2 - $datetime1;// == <seconds between the two times>
+    $days = $secs / 86400;
+        $cost1=($days + 1)* $cost1;
+      //  echo $days ;
             echo '<tr>';
-            echo '<td>'.$row['test_name'].'</td>';
-            echo '<td>'.$row['cost'].'</td>';
-            $cost2 = $cost2 + $row['cost'];
-            echo '</tr>';
+            echo '<td>'.$row['admission_date'].'</td>';
+            echo '<td>'.$row['discharge_date'].'</td>';
+             echo '<td>'.$cost1.'</td>';
+            
+            $room_cost=$room_cost+$cost1;
+    
         }
         echo '</table> <br />';
-        echo "<h4> Total Tests Cost : ".$cost2 ."</h4><br/>";
+
+
+
+
+
+
+
+
+            $cost=$cost+$room_cost;
         $status = "Total amount = " . $cost;
-        // echo $status . "<br/>";
         // header('Location: ../rep_home.php?status='.urlencode($status));
-        echo "<h4> Total : ".($cost + $cost2) ."</h4><br/>";
+        echo "<h4> Total : ".$cost ."</h4><br/>";
     }
 ?>
 
 <form action= "pay_amnt.php" method="POST">
     <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>">
    <div class="line submit"><input type="submit" value="Pay" /></div>
+</form>
+<form action= "../home.php" method="POST">
+  <!-- //  <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>"> -->
+   <div class="line submit"><input type="submit" value="back to home page " /></div>
 </form>

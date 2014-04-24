@@ -68,7 +68,7 @@
 
 <?php 
     if(isset($_GET['doc_type'])) 
-    { 
+    {
     	mysql_connect("localhost","root","");
 		mysql_select_db("hospital");
         $doc_type = $_GET['doc_type'];
@@ -109,24 +109,25 @@
         </style>
     </head>
     <body>
-    <?php
-        if(isset($_GET['error']))
-        {
-            $error = $_GET['error'];
-            echo $error . "<br/>" ;
-            echo "<p style='color:red'> Incorrect details </p>" ;
-        }
-    ?>
-    <div id="container">
-        <form action="includes/assign_slot.php"  method="POST" id='app_form' >
-            <div class="line">Patient Medical Registration Number
-            <input type="number" name="patient_id" id="patient_id">
-            </div>
-            <div class="line">Date of Appointment<input type="date" id="app_date" name='app_date'></div>
-            <div class="line submit"><input type="submit" value="Submit" /></div>
 
-            <p>Note: Please make sure your details are correct before submitting form.</p>
-        </form>
-    </div>
+
+ <div id="container">
+<form action="includes/assign_slot.php" method="POST" id='app_form' >
+<div class="line">Patient Medical Registration Number
+<input type="number" name="patient_id" id="patient_id">
+</div>
+<div class="line">Date of Appointment<input type="date" id="app_date" name='app_date'></div>
+<div class="line submit"><input type="submit" value="Submit" /></div>
+
+<p>Note: Please make sure your details are correct before submitting form.</p>
+</form>
+</div>
+
+<form action= "home.php" method="POST">
+  <!-- //  <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>"> -->
+   <div class="line submit"><input type="submit" value="back to home page " /></div>
+</form>
+
+
     </body>
 </html>

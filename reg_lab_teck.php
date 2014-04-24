@@ -68,6 +68,10 @@ include('includes/functions.php');
  
                 <p>Note: Please make sure your details are correct before submitting form.</p>
             </form>
+            <form action= "home.php" method="POST">
+  <!-- //  <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>"> -->
+   <div class="line submit"><input type="submit" value="back to home page " /></div>
+</form>
         </div>
     </body>
 </html>

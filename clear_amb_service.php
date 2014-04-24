@@ -71,5 +71,10 @@ if ($_SESSION['type'] != "rep") {
     <form action="includes/clear_amb.php" id="amb_service" method="POST">
         <div class="line submit"><input type="submit" value="Clear" /></div>
     </form>
+
+    <form action= "home.php" method="POST">
+  <!-- //  <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>"> -->
+   <div class="line submit"><input type="submit" value="back to home page " /></div>
+</form>
 </body>
 </html>

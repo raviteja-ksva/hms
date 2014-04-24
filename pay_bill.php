@@ -45,5 +45,9 @@ if ($_SESSION['type'] != "rep") {
         </div>
 	<div class="line submit"><input type="submit" value="Send" /></div>
 	</form>
+<form action= "home.php" method="POST">
+  <!-- //  <input type="hidden" name="patient_id" id = "patient_id" value="<?php echo $patient_id; ?>"> -->
+   <div class="line submit"><input type="submit" value="back to home page " /></div>
+</form>
 </body>
 </html>

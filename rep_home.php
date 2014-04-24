@@ -42,7 +42,9 @@ $username = get_username($_SESSION['userid'], $_SESSION['type'], $con);
 		<p><a href="book_appt.php">Book Apointment</a></p>
 		<p><a href="amb_service.php">Send Ambulence</a></p>
 		<p><a href="clear_amb_service.php">Clear Ambulence Service</a></p>
-		<p><a href="rep_home.php" target="_blank">Clean a room</a></p>
+		<p><a href="clear_room_service.php" >Clean a room</a></p>
+		<p><a href="allocate_room.php">Allocate  a room</a></p>
+		<p><a href="discharge_patient.php" >Discharge  a patient</a></p>
 		<!-- <p><a href="rep_home.php" target="_blank">Check Doctor slot</a></p> -->
 
 		<p><a href="pay_bill.php">Bill payment</a></p>

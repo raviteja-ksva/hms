@@ -89,6 +89,7 @@
 	}
 
 	// select database and setup connection
+	else {
 
 	$con=mysql_connect('localhost','root','');
 	if (!$con) {
@@ -102,8 +103,15 @@
 	{
 		// echo 'inerted';
 		$lt_id = mysql_insert_id();
-		$status = "lab teck record added successfully.\\nlab teck Registration Number = " . $lt_id;
-		header('Location: ../rep_home.php?status='.urlencode($status));
+
+			$login_query = "INSERT INTO login (`user_id`, `user_name`, `type`, `password`) VALUES ('$lt_id', '$name', 'lab_teck', '$name');";
+		if(mysql_query($login_query))
+		{
+			$status = "Lab teck record added successfull.";
+			header('Location: ../admin_home.php?status='.urlencode($status));
+		}
+		
 	}
 	mysql_close($con);
+}
 ?>

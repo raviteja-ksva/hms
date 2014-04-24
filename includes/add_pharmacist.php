@@ -90,6 +90,7 @@
 	}
 
 	// select database and setup connection
+	else{
 
 	$con=mysql_connect('localhost','root','');
 	if (!$con) {
@@ -103,8 +104,15 @@
 	{
 		// echo 'inerted';
 		$ph_id = mysql_insert_id();
-		$status = "Pharmacist record added successfull.\\nPharmacist Registration Number = " . $ph_id;
-		header('Location: ../admin_home.php?status='.urlencode($status));
+
+		$login_query = "INSERT INTO login (`user_id`, `user_name`, `type`, `password`) VALUES ('$ph_id', '$name', 'ph', '$name');";
+				if(mysql_query($login_query))
+				{
+					$status = "Pharmacist record added successfull.\\Pharmacist  Registration Number = " . $patient_id;
+					header('Location: ../rep_home.php?status='.urlencode($status));
+				}
+		
 	}
 	mysql_close($con);
+}
 ?>

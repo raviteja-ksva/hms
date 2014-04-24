@@ -47,6 +47,16 @@ $username = get_username($_SESSION['userid'],$_SESSION['type'], $con);
 		<p><a href="reg_receptionist.php" >Add receptionist</a></p>
 		<p><a href="reg_pharmacist.php" >Add Pharmasict</a></p>
 		<p><a href="reg_ward_boy.php" >Add ward_boy</a></p>
+		<p><a href="edit_doctor.php" >Edit Doctor</a></p>
+		<p><a href="edit_nurse.php" >Edit nurse</a></p>
+		<p><a href="edit_receptionist.php" >Edit receptionist</a></p>
+		<p><a href="edit_lag_teck.php" >Edit lab_teck</a></p>
+		<p><a href="edit_ward_boy.php" >Edit ward_boy</a></p>
+		<p><a href="edit_accountant.php" >Edit Accountant</a></p>
+		<p><a href="edit_ambulance.php" >Edit Ambulance</a></p>
+		<!-- <p><a href="rep_home.php" target="_blank">Check Doctor slot</a></p> -->
+		<!-- <p><a href="rep_home.php" target="_blank">Bill payment</a></p> -->
+		<p><a href="view_doctor_admin.php" >View doctor</a></p>
 		<!-- <p><a href="rep_home.php" target="_blank">Check Doctor slot</a></p> -->
 		<!-- <p><a href="rep_home.php" target="_blank">Bill payment</a></p> -->
 

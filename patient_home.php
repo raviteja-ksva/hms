@@ -27,6 +27,12 @@ $username = get_username($_SESSION['userid'],$_SESSION['type'], $con);
 		<p>This is secured page with session: <b> <?php echo $username; ?></b>
 		<br>You can put your restricted information here.</p>
 
+		<p><a href="view_doctor.php" >View doctors</a></p>
+		<p><a href="view_prescription.php" >View Prescription</a></p>
+			<p><a href="view_appointment.php" >View Appointment</a></p>
+			<p><a href="view_medicines.php" >View Available medicines</a></p>
+				<p><a href="view_available_tests.php" >View Available tests</a></p>
+				<p><a href="view_tests_taken.php" >View  tests taken</a></p>
 		<p><a href="chng_pass.php">Change Password</a></p>
 		<p><a href="includes/logout.php">Logout</a></p>
 

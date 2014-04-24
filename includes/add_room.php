@@ -55,6 +55,7 @@
 	}
 
 	// select database and setup connection
+	else{
 
 	$con=mysql_connect('localhost','root','');
 	if (!$con) {
@@ -72,4 +73,5 @@
 		header('Location: ../rep_home.php?status='.urlencode($status));
 	}
 	mysql_close($con);
+}
 ?>
